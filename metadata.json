@@ -1,0 +1,8 @@
+{
+  "name": "CodePair AI",
+  "description": "An AI-powered video platform for real-time collaborative coding practice. Get matched with a peer, solve problems, and receive instant feedback from a cutting-edge AI.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
