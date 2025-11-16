@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { RocketIcon } from './Icons';
 
@@ -22,12 +21,12 @@ const LandingPage: React.FC<LandingPageProps> = ({ onStart }) => {
         <div className="text-center">
             <RocketIcon className="w-16 h-16 mx-auto text-indigo-400"/>
             <h1 className="text-4xl font-bold text-white mt-4">CodePair AI</h1>
-            <p className="mt-2 text-gray-400">Your AI-powered launchpad for live coding practice.</p>
+            <p className="mt-2 text-gray-400">Practice coding live with a partner and get instant feedback.</p>
         </div>
-        <div className="mt-8 text-sm text-gray-300 space-y-2">
-            <p><span className="font-semibold text-indigo-400">99.2% Uptime:</span> Reliable sessions powered by FastAPI & Socket.io.</p>
-            <p><span className="font-semibold text-indigo-400">40% Faster Matching:</span> BERT + Redis matcher finds your ideal partner.</p>
-            <p><span className="font-semibold text-indigo-400">35% More Engagement:</span> Enhanced with Whisper & VADER analysis.</p>
+        <div className="mt-8 text-sm text-gray-300 space-y-3">
+            <p><span className="font-semibold text-indigo-400">Live Video Sessions:</span> Connect and code with peers in real-time.</p>
+            <p><span className="font-semibold text-indigo-400">Smart Matching:</span> Our algorithm pairs you with the right partner to tackle challenges together.</p>
+            <p><span className="font-semibold text-indigo-400">Instant Feedback:</span> Submit your code and get helpful feedback from our AI assistant.</p>
         </div>
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <div>

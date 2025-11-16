@@ -1,4 +1,3 @@
-
 import { GoogleGenAI, Type } from "@google/genai";
 import type { CodingProblem } from '../types';
 
@@ -48,7 +47,7 @@ export const generateCodingProblem = async (): Promise<CodingProblem> => {
     // Fallback problem in case of API error
     return {
       title: "API Error: Palindrome Checker",
-      description: "There was an error fetching a problem from the AI. As a fallback, please implement a function that checks if a given string is a palindrome (reads the same forwards and backwards).",
+      description: "Could not connect to the problem service. To get you started, here's a classic: implement a function that checks if a given string is a palindrome (reads the same forwards and backwards).",
       examples: [
         "Input: 'racecar', Output: true",
         "Input: 'hello', Output: false"

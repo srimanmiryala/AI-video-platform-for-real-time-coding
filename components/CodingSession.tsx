@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import type { CodingProblem } from '../types';
 import { generateCodingProblem, getAIFeedback } from '../services/geminiService';
@@ -14,6 +13,40 @@ interface CodingSessionProps {
 const mockPeer = {
     name: 'Alex',
 };
+
+// Simple markdown to HTML renderer
+const renderMarkdown = (text: string): string => {
+    if (!text) return '';
+
+    let html = '';
+    // Split by code blocks to handle them separately
+    const parts = text.split('```');
+
+    parts.forEach((part, index) => {
+        if (index % 2 === 0) { // This is a markdown part
+            const markdownPart = part
+                .replace(/^\s*#\s(.+)/gm, '<h3>$1</h3>')
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                .replace(/\*(.*?)\*/g, '<em>$1</em>')
+                .replace(/`([^`]+)`/g, '<code class="bg-gray-700 text-indigo-300 rounded px-1 py-0.5 text-sm">$1</code>')
+                .replace(/\n/g, '<br />');
+            html += markdownPart;
+        } else { // This is a code part
+            let codeContent = part;
+            let language = '';
+            // Check for language definition, e.g., javascript
+            const langMatch = part.match(/^(.*?)\n/);
+            if (langMatch && langMatch[1].trim()) {
+                language = langMatch[1].trim();
+                codeContent = part.substring(langMatch[0].length);
+            }
+            html += `<pre class="bg-gray-900 p-3 rounded-md overflow-x-auto text-sm my-2"><code class="language-${language}">${codeContent.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</code></pre>`;
+        }
+    });
+
+    return html;
+};
+
 
 const CodingSession: React.FC<CodingSessionProps> = ({ username, onEndSession }) => {
     const [problem, setProblem] = useState<CodingProblem | null>(null);
@@ -100,9 +133,9 @@ const CodingSession: React.FC<CodingSessionProps> = ({ username, onEndSession })
                         )}
                     </div>
                     <div className="bg-gray-800 p-4 rounded-lg shadow-lg flex-grow">
-                        <h2 className="text-xl font-bold text-indigo-400 mb-2">AI Feedback</h2>
-                        {isLoadingFeedback && <p className="text-sm text-gray-400 animate-pulse">AI is thinking...</p>}
-                        {feedback && <div className="prose prose-sm prose-invert max-w-none" dangerouslySetInnerHTML={{ __html: feedback.replace(/\n/g, '<br />') }} />}
+                        <h2 className="text-xl font-bold text-indigo-400 mb-2">Feedback</h2>
+                        {isLoadingFeedback && <p className="text-sm text-gray-400 animate-pulse">Generating feedback...</p>}
+                        {feedback && <div className="prose prose-sm prose-invert max-w-none" dangerouslySetInnerHTML={{ __html: renderMarkdown(feedback) }} />}
                     </div>
                 </div>
 
@@ -119,11 +152,6 @@ const CodingSession: React.FC<CodingSessionProps> = ({ username, onEndSession })
                         <button onClick={handleEnd} className="bg-red-600 hover:bg-red-700 p-3 rounded-full transition-colors">
                             <EndCallIcon className="w-6 h-6 text-white"/>
                         </button>
-                    </div>
-                    <div className="text-center text-xs text-gray-500 space-y-1">
-                        <p>Connection: Secure (JWT)</p>
-                        <p>AI Moderation: Active</p>
-                        <p>Noise Reduction: ON (RNNoise)</p>
                     </div>
                 </div>
             </div>

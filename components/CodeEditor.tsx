@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 interface CodeEditorProps {
@@ -29,7 +28,7 @@ const CodeEditor: React.FC<CodeEditorProps> = ({ code, setCode, onSubmit, isLoad
           disabled={isLoading}
           className="w-full px-4 py-2 text-sm font-semibold text-white bg-indigo-600 rounded-md hover:bg-indigo-700 disabled:bg-indigo-800 disabled:cursor-not-allowed transition-colors"
         >
-          {isLoading ? 'Analyzing...' : 'Submit for AI Feedback'}
+          {isLoading ? 'Analyzing...' : 'Get Feedback'}
         </button>
       </div>
     </div>

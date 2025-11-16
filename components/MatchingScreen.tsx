@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 
 interface MatchingScreenProps {
@@ -7,12 +6,12 @@ interface MatchingScreenProps {
 }
 
 const messages = [
-  "Initializing secure connection...",
-  "Analyzing your coding profile...",
-  "Deploying BERT + Redis matcher...",
-  "Finding peers with 35% higher compatibility...",
-  "Cutting wait time by 40%...",
-  "Finalizing match...",
+  "Establishing secure connection...",
+  "Analyzing your skill profile...",
+  "Searching for available partners...",
+  "Evaluating best matches...",
+  "Connecting you with a peer...",
+  "Match found! Preparing your session...",
 ];
 
 const MatchingScreen: React.FC<MatchingScreenProps> = ({ username, onMatchFound }) => {
